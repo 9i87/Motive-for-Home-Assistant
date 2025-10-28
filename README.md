@@ -114,35 +114,122 @@ ha core restart
 Create a new dashboard view with this configuration:
 
 ```yaml
-title: Productivity
-icon: mdi:target
+type: vertical-stack
 cards:
-  # Progress Bar
   - type: tile
+    grid_options:
+      columns: 12
+      rows: 2
     entity: sensor.motive_goal_progress
-    name: Daily Progress
+    name: Progress
+    icon: mdi:progress-helper
     color: green
-    
-  # Goal Adjuster
-  - type: entities
-    entities:
-      - entity: input_number.motive_daily_goal
-        name: Daily Goal (minutes)
-        
-  # Timer Control
-  - type: button
-    entity: input_boolean.motive_timer_active
-    name: Start/Stop Timer
-    
-  # Category Selection
-  - type: grid
+    vertical: false
+    features:
+      - type: bar-gauge
+    features_position: bottom
+  - type: horizontal-stack
     cards:
-      - type: button
+      - type: tile
+        entity: input_number.motive_time_tracked_today
+        name: Getrackt
+        color: blue
+        state_content:
+          - state
+        vertical: false
+        tap_action:
+          action: none
+        icon_tap_action:
+          action: none
+        features_position: bottom
+      - type: tile
+        entity: input_number.motive_streak_counter
+        name: Streak
+        color: orange
+        state_content:
+          - state
+        vertical: false
+        tap_action:
+          action: none
+        icon_tap_action:
+          action: none
+        features_position: bottom
+  - type: tile
+    grid_options:
+      columns: 12
+      rows: 1
+    entity: input_boolean.motive_timer_active
+    name: Timer
+    color: red
+    hide_state: true
+    vertical: false
+    features:
+      - type: toggle
+    features_position: inline
+  - type: horizontal-stack
+    cards:
+      - type: tile
         entity: input_boolean.motive_cat_bega
-        name: BEGA
-      - type: button
+        name: "BEGA "
+        color: green
+        hide_state: true
+        vertical: true
+        tap_action:
+          action: toggle
+        features_position: bottom
+      - type: tile
         entity: input_boolean.motive_cat_privat
-        name: Private
+        name: " Privat"
+        color: green
+        hide_state: true
+        vertical: true
+        tap_action:
+          action: toggle
+        features_position: bottom
+      - type: tile
+        entity: input_boolean.motive_cat_coding
+        name: Coding
+        color: green
+        hide_state: true
+        vertical: true
+        tap_action:
+          action: toggle
+        features_position: bottom
+      - type: tile
+        entity: input_boolean.motive_cat_design
+        name: Design
+        color: green
+        hide_state: true
+        vertical: true
+        tap_action:
+          action: toggle
+        features_position: bottom
+      - type: tile
+        entity: input_boolean.motive_cat_engineering
+        name: " Engineer"
+        color: green
+        hide_state: true
+        vertical: true
+        tap_action:
+          action: toggle
+        features_position: bottom
+  - type: history-graph
+    entities:
+      - entity: sensor.motive_active_work
+    logarithmic_scale: false
+    hours_to_show: 10
+  - type: tile
+    entity: input_boolean.motive_sick_mode
+    color: blue-grey
+    vertical: false
+    tap_action:
+      action: toggle
+    icon_tap_action:
+      action: none
+    features_position: bottom
+grid_options:
+  columns: 12
+  rows: 1
 ```
 
 ### Quick Start
