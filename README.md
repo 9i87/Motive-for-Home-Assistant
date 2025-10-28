@@ -169,8 +169,8 @@ cards:
   - type: horizontal-stack
     cards:
       - type: tile
-        entity: input_boolean.motive_cat_bega
-        name: "BEGA "
+        entity: input_boolean.motive_cat_work
+        name: "Work"
         color: green
         hide_state: true
         vertical: true
@@ -239,7 +239,7 @@ grid_options:
    - Adjust daily goal with +/- buttons (5-minute increments)
 
 2. **Start Tracking**
-   - Select a category (BEGA, Private, Coding, etc.)
+   - Select a category (Work, Private, Coding, etc.)
    - Tap the timer to start tracking
    - Timer automatically saves progress when stopped
 
