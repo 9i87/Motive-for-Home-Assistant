@@ -75,7 +75,7 @@
   trigger:
   - platform: state
     entity_id:
-    - input_boolean.motive_cat_bega
+    - input_boolean.motive_cat_work
     - input_boolean.motive_cat_privat
     - input_boolean.motive_cat_coding
     - input_boolean.motive_cat_design
@@ -86,7 +86,7 @@
   - variables:
       triggered_entity: '{{ trigger.entity_id }}'
       category_map:
-        input_boolean.motive_cat_bega: BEGA
+        input_boolean.motive_cat_work: Work
         input_boolean.motive_cat_privat: Privat
         input_boolean.motive_cat_coding: Coding
         input_boolean.motive_cat_design: Design
@@ -99,7 +99,7 @@
       value: '{{ selected_category }}'
   - service: input_boolean.turn_off
     target:
-      entity_id: "{% set entities = [\n  'input_boolean.motive_cat_bega',\n  'input_boolean.motive_cat_privat',
+      entity_id: "{% set entities = [\n  'input_boolean.motive_cat_work',\n  'input_boolean.motive_cat_privat',
         \n  'input_boolean.motive_cat_coding',\n  'input_boolean.motive_cat_design',\n
         \ 'input_boolean.motive_cat_engineering'\n] %} {{ entities | reject('eq',
         triggered_entity) | list }}\n"
