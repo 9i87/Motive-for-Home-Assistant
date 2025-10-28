@@ -156,7 +156,6 @@ cards:
 3. **Monitor Progress**
    - View real-time progress on the main dashboard
    - Check your streak counter
-   - Review your productivity heatmap
 
 4. **Sick Days**
    - Enable "Sick Mode" to pause without breaking your streak
