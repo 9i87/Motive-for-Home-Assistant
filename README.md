@@ -41,17 +41,7 @@ A beautifully designed productivity tracking system for Home Assistant that turn
 Ensure you have the following integrations installed:
 
 - **Home Assistant** 2024.1.0 or newer
-- **HACS** (for custom cards)
 - **Your favourite AI-Integration to Update your daily goal based on a HASS ToDo-List** (optional, for AI features)
-
-### Required HACS Components
-
-Install through HACS → Frontend:
-
-```yaml
-- Lovelace
-- Mushroom-Cards
-```
 
 ## 🚀 Setup
 
@@ -294,7 +284,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 ## 🙏 Acknowledgments
 
 - Home Assistant Community
-- HACS Developers
+- [**@valentin-berlin**](https://github.com/valentin-berlin/) for the idea
 
 ---
 
