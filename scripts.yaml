@@ -34,7 +34,7 @@ motive_reset_day:
       target:
         entity_id:
           - input_boolean.motive_timer_active
-          - input_boolean.motive_cat_bega
+          - input_boolean.motive_cat_work
           - input_boolean.motive_cat_privat
           - input_boolean.motive_cat_coding
           - input_boolean.motive_cat_design
