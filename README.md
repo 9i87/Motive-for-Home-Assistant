@@ -39,7 +39,7 @@ Ensure you have the following integrations installed:
 
 - **Home Assistant** 2024.1.0 or newer
 - **HACS** (for custom cards)
-- **OpenAI Conversation** (optional, for AI features)
+- **Your favourite AI-Integration to Update your daily goal based on a HASS ToDo-List** (optional, for AI features)
 
 ### Required HACS Components
 
