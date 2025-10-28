@@ -232,24 +232,6 @@ grid_options:
   rows: 1
 ```
 
-### Quick Start
-
-1. **Set Your Daily Goal**
-   - Navigate to Settings section
-   - Adjust daily goal with +/- buttons (5-minute increments)
-
-2. **Start Tracking**
-   - Select a category (Work, Private, Coding, etc.)
-   - Tap the timer to start tracking
-   - Timer automatically saves progress when stopped
-
-3. **Monitor Progress**
-   - View real-time progress on the main dashboard
-   - Check your streak counter
-
-4. **Sick Days**
-   - Enable "Sick Mode" to pause without breaking your streak
-
 ## 📊 Entities Reference
 
 ### Input Numbers
