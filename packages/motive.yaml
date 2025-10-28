@@ -59,8 +59,8 @@ input_boolean:
     name: "Krankheitsmodus"
     icon: mdi:hospital-box
     
-  motive_cat_bega:
-    name: "BEGA"
+  motive_cat_work:
+    name: "Work"
     icon: mdi:domain
     
   motive_cat_privat:
@@ -198,7 +198,7 @@ template:
         icon: >
           {% if states('input_boolean.motive_timer_active') == 'on' %}
             {% set cat = states('input_text.motive_active_category') %}
-            {% if cat == 'BEGA' %}
+            {% if cat == 'Work' %}
               mdi:domain
             {% elif cat == 'Privat' %}
               mdi:home
