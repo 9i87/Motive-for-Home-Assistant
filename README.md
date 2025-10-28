@@ -10,6 +10,8 @@
 
 A beautifully designed productivity tracking system for Home Assistant that turns time into achievements.
 
+<img width="1748" height="1606" alt="Image" src="https://github.com/user-attachments/assets/ae69df2b-00e7-4bc2-a05d-aa2267276044" />
+
 ##### Attention
 ###### This project was made with the help of Anthropic Claude Opus 4.1 Reasoning. It is possible that the project has faults or problems. Please feel free to commit changes to avoid issues.
 
