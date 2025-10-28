@@ -140,12 +140,6 @@ cards:
       - type: button
         entity: input_boolean.motive_cat_privat
         name: Private
-        
-  # Heatmap
-  - type: custom:calendar-heatmap-card
-    entity: input_number.motive_daily_achievement
-    title: 🎯 Productivity Heatmap
-    days_to_show: 365
 ```
 
 ### Quick Start
