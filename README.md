@@ -8,7 +8,7 @@
 
 **Transform your productivity into measurable goals.**
 
-A beautifully designed productivity tracking system for Home Assistant that turns time into achievements.
+A beautifully designed productivity tracking system for Home Assistant that turns time into achievements. <br>
 Made by @v-berlin and @apfelFunker
 
 <img width="1748" height="1606" alt="Image" src="https://github.com/user-attachments/assets/ae69df2b-00e7-4bc2-a05d-aa2267276044" />
