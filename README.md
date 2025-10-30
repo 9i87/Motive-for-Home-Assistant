@@ -9,23 +9,18 @@
 **Transform your productivity into measurable goals.**
 
 A beautifully designed productivity tracking system for Home Assistant that turns time into achievements.
+Made by @v-berlin and @apfelFunker
 
 <img width="1748" height="1606" alt="Image" src="https://github.com/user-attachments/assets/ae69df2b-00e7-4bc2-a05d-aa2267276044" />
 
-> [!WARNING]
-> ⚠️ The README.md and the comments in the code are generatet by AI. Errors may be present. If you find one feel free to create an Issue with the Tag "Readme". Thanks for your cooperation
+#### Warnung
+⚠️ The README.md and the comments in the code are generatet by AI. Errors may be present. If you find one feel free to create an Issue with the Tag "Readme". Thanks for your cooperation
 
-> [!WARNING]  
-> Critical content demanding immediate user attention due to potential risks.
+#### Info
+This Project is built for Home Assistant Docker but it will also work with HA Core. The steps you need to do are a little different but not that far off.
 
-> [!Info]
-> This Project is built for Home Assistant Docker but it will also work with HA 
-> Core. The steps you need to do are a little different but not that far off.
-
-> [!Info]
-> The original Version named "Flow" can be found [here](). Flow is not under 
-> development anymore and the new project is called Motive. Motive will start with 
-> the same features as Flow but will get more eventually.
+#### Info
+The original Version named "Flow" can be found [here](). Flow is not under development anymore and the new project is called Motive. Motive will start with the same features as Flow but will get more eventually.
 </div>
 
 ---
