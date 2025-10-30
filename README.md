@@ -606,8 +606,8 @@ You need to access your Home Assistant configuration directory. Choose one of th
 Copy the three YAML files from this repository to your Home Assistant configuration directory:
 
 1. **motive.yaml** - Main configuration with all entities and sensors
-2. **automations.yaml** - Automations for Motive (append to existing file)
-3. **scripts.yaml** - Helper scripts for Motive (append to existing file)
+2. **flow_automations.yaml** - Automations for Motive (append to existing file)
+3. **flow_scripts.yaml** - Helper scripts for Motive (append to existing file)
 
 #### Important Notes:
 
