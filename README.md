@@ -13,9 +13,7 @@ A beautifully designed productivity tracking system for Home Assistant that turn
 <img width="1748" height="1606" alt="Image" src="https://github.com/user-attachments/assets/ae69df2b-00e7-4bc2-a05d-aa2267276044" />
 
 > [!WARNING]
-> ⚠️ The README.md and the comments in the code are generatet by AI. Errors may be present.
-> If you find one feel free to create an Issue with the Tag "Readme".
-> Thanks for your cooperation
+> ⚠️ The README.md and the comments in the code are generatet by AI. Errors may be present. If you find one feel free to create an Issue with the Tag "Readme". Thanks for your cooperation
 
 > [!Info]
 > This Project is built for Home Assistant Docker but it will also work with HA 
