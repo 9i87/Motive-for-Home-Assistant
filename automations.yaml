@@ -24,11 +24,26 @@
           entity_id: input_datetime.motive_timer_start
         data:
           datetime: '{{ now() }}'
-      - service: timer.start
-        target:
-          entity_id: timer.motive_work_timer
-        data:
-          duration: 08:00:00
+      - choose:
+        - conditions:
+          - condition: template
+            value_template: "{{ states('input_text.motive_active_category') in ['Keine', '', 'unknown', 'unavailable'] }}"
+          sequence:
+          - service: input_text.set_value
+            target:
+              entity_id: input_text.motive_active_category
+            data:
+              value: 'Work'
+          - service: input_boolean.turn_on
+            target:
+              entity_id: input_boolean.motive_cat_work
+          - service: input_boolean.turn_off
+            target:
+              entity_id:
+              - input_boolean.motive_cat_privat
+              - input_boolean.motive_cat_coding
+              - input_boolean.motive_cat_design
+              - input_boolean.motive_cat_engineering
       - service: persistent_notification.create
         data:
           title: ⏱️ Timer gestartet
@@ -37,9 +52,6 @@
       - condition: trigger
         id: timer_stop
       sequence:
-      - service: timer.cancel
-        target:
-          entity_id: timer.motive_work_timer
       - variables:
           start_time: '{{ states(''input_datetime.motive_timer_start'') }}'
       - choose:
@@ -177,7 +189,7 @@
   - service: input_boolean.turn_off
     target:
       entity_id:
-      - input_boolean.motive_cat_bega
+      - input_boolean.motive_cat_work
       - input_boolean.motive_cat_privat
       - input_boolean.motive_cat_coding
       - input_boolean.motive_cat_design
@@ -190,20 +202,6 @@
       entity_id: input_datetime.motive_last_reset
     data:
       datetime: '{{ now() }}'
-  mode: single
-- id: 897a07fd75a74783a18164b261ba3d88
-  alias: Motive - Save Daily Achievement
-  description: Speichert Tagesfortschritt für Heatmap
-  trigger:
-  - platform: time
-    at: '23:59:00'
-  condition: []
-  action:
-  - service: input_number.set_value
-    target:
-      entity_id: input_number.motive_daily_achievement
-    data:
-      value: '{{ states(''sensor.motive_goal_progress'') | float(0) }}'
   mode: single
 - id: bd4a3f2ab8e94c4e883caf4837aea542
   alias: Motive - Goal Reached Notification
@@ -232,4 +230,19 @@
         Streak: {{ states(''input_number.motive_streak_counter'') }} Tage
 
         '
+  mode: single
+
+- id: ffd3f3e2b1b14c1fa5e2e4e2b6f4c8d3
+  alias: Motive Timer Tick
+  description: "Aktualisiert den Tick-Helfer alle 5 Sekunden, damit Template-Sensor häufiger gerendert wird"
+  trigger:
+    - platform: time_pattern
+      seconds: '/5'
+  condition: []
+  action:
+    - service: input_number.set_value
+      target:
+        entity_id: input_number.motive_timer_tick
+      data:
+        value: "{{ as_timestamp(now()) }}"
   mode: single

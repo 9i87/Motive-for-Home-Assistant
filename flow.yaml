@@ -1,0 +1,236 @@
+# ============================================
+# MOTIVE PRODUCTIVITY TRACKER
+# Simplified and optimized configuration
+# ============================================
+motive_tracker:
+  # INPUT NUMBERS
+  input_number:
+    motive_daily_goal:
+      name: "Tägliches Ziel (Minuten)"
+      min: 0
+      max: 1440
+      step: 5
+      unit_of_measurement: "min"
+      icon: mdi:target
+
+    motive_time_tracked_today:
+      name: "Heute getrackte Zeit"
+      min: 0
+      max: 1440
+      step: 1
+      unit_of_measurement: "min"
+      icon: mdi:clock-check
+
+    motive_streak_counter:
+      name: "Streak Tage"
+      min: 0
+      max: 9999
+      step: 1
+      icon: mdi:fire
+
+    motive_timer_tick:
+      name: Motive Timer Tick
+      initial: 0
+      min: 0
+      max: 40000000000
+      step: 1
+
+  # INPUT BOOLEANS
+  input_boolean:
+    motive_timer_active:
+      name: "Timer Aktiv"
+      icon: mdi:play-pause
+
+    motive_sick_mode:
+      name: "Krankheitsmodus"
+      icon: mdi:hospital-box
+
+    motive_cat_work:
+      name: "Work"
+      icon: mdi:domain
+
+    motive_cat_privat:
+      name: "Privat"
+      icon: mdi:home
+
+    motive_cat_coding:
+      name: "Coding"
+      icon: mdi:code-braces
+
+    motive_cat_design:
+      name: "Design"
+      icon: mdi:palette
+
+    motive_cat_engineering:
+      name: "Engineering"
+      icon: mdi:cog
+
+  # INPUT DATETIME
+  input_datetime:
+    motive_timer_start:
+      name: "Timer Startzeit"
+      has_date: true
+      has_time: true
+
+    motive_last_reset:
+      name: "Letzter Reset"
+      has_date: true
+      has_time: true
+
+  # INPUT TEXT
+  input_text:
+    motive_active_category:
+      name: "Aktive Kategorie"
+      initial: "Keine"
+      max: 20
+
+    motive_history_data:
+      name: "Historie Daten"
+      max: 255
+      initial: "{}"
+
+  # TEMPLATE SENSORS
+  template:
+    - sensor:
+        # Fortschritt in Prozent
+        - name: "Motive Goal Progress"
+          unique_id: motive_goal_progress
+          state: >
+            {% set goal = states('input_number.motive_daily_goal') | float(0) %}
+            {% set tracked = states('input_number.motive_time_tracked_today') | float(0) %}
+            {% if goal > 0 %}
+              {{ ((tracked / goal) * 100) | round(1) }}
+            {% else %}
+              0
+            {% endif %}
+          unit_of_measurement: "%"
+          icon: mdi:percent-circle
+          attributes:
+            tracked_minutes: "{{ states('input_number.motive_time_tracked_today') | int }}"
+            goal_minutes: "{{ states('input_number.motive_daily_goal') | int }}"
+            remaining_minutes: >
+              {% set diff = states('input_number.motive_daily_goal') | int - states('input_number.motive_time_tracked_today') | int %}
+              {{ diff if diff > 0 else 0 }}
+            time_formatted: >
+              {% set minutes = states('input_number.motive_time_tracked_today') | int %}
+              {% set hours = minutes // 60 %}
+              {% set mins = minutes % 60 %}
+              {{ "%d:%02d" | format(hours, mins) }}
+            goal_formatted: >
+              {% set minutes = states('input_number.motive_daily_goal') | int %}
+              {% set hours = minutes // 60 %}
+              {% set mins = minutes % 60 %}
+              {{ "%d:%02d" | format(hours, mins) }}
+        
+        # Status Text mit Kategorie
+        - name: "Motive Status"
+          unique_id: motive_status
+          state: >
+            {% set category = states('input_text.motive_active_category') %}
+            {% set progress = states('sensor.motive_goal_progress') | float(0) %}
+            {% if states('input_boolean.motive_timer_active') == 'on' %}
+              🔴 {{ category }} läuft...
+            {% elif states('input_boolean.motive_sick_mode') == 'on' %}
+              🏥 Krankheitsmodus
+            {% elif progress >= 100 %}
+              ✅ Ziel erreicht!
+            {% elif category != 'Keine' %}
+              {{ category }} - {{ progress | round(0) }}%
+            {% else %}
+              Bereit zum Starten 🚀
+            {% endif %}
+          icon: >
+            {% if states('input_boolean.motive_timer_active') == 'on' %}
+              mdi:record-circle
+            {% else %}
+              mdi:information-outline
+            {% endif %}
+
+        # Zeigt aktive Kategorie nur wenn Timer läuft
+        - name: "Motive Active Work"
+          unique_id: motive_active_work
+          state: >
+            {% if states('input_boolean.motive_timer_active') == 'on' %}
+              {{ states('input_text.motive_active_category') }}
+            {% else %}
+              Inaktiv
+            {% endif %}
+          icon: >
+            {% if states('input_boolean.motive_timer_active') == 'on' %}
+              {% set cat = states('input_text.motive_active_category') %}
+              {% if cat == 'Work' %}
+                mdi:domain
+              {% elif cat == 'Privat' %}
+                mdi:home
+              {% elif cat == 'Coding' %}
+                mdi:code-braces
+              {% elif cat == 'Design' %}
+                mdi:palette
+              {% elif cat == 'Engineering' %}
+                mdi:cog
+              {% else %}
+                mdi:help-circle
+              {% endif %}
+            {% else %}
+              mdi:pause-circle
+            {% endif %}
+          attributes:
+            timer_running: "{{ states('input_boolean.motive_timer_active') }}"
+            category: "{{ states('input_text.motive_active_category') }}"
+            elapsed_minutes: "{{ states('sensor.motive_timer_elapsed') }}"
+            started_at: >
+              {% if states('input_boolean.motive_timer_active') == 'on' %}
+                {{ states('input_datetime.motive_timer_start') }}
+              {% else %}
+                Nicht aktiv
+              {% endif %}
+        
+        # Timer Elapsed Time
+        - name: "Motive Timer Elapsed"
+          unique_id: motive_timer_elapsed
+          state: >
+            {% if states('input_boolean.motive_timer_active') == 'on' %}
+              {% set start = states('input_datetime.motive_timer_start') | as_datetime %}
+              {% set now_ts = states('input_number.motive_timer_tick') | float(0) %}
+              {% if start %}
+                {{ ((now_ts - as_timestamp(start)) / 60) | int }}
+              {% else %}
+                0
+              {% endif %}
+            {% else %}
+              0
+            {% endif %}
+          unit_of_measurement: "min"
+          icon: mdi:timer
+          attributes:
+            formatted: >
+              {% set minutes = 0 %}
+              {% if states('input_boolean.motive_timer_active') == 'on' %}
+                {% set start = states('input_datetime.motive_timer_start') | as_datetime %}
+                {% set now_ts = states('input_number.motive_timer_tick') | float(0) %}
+                {% if start %}
+                  {% set minutes = ((now_ts - as_timestamp(start)) / 60) | int %}
+                {% endif %}
+              {% endif %}
+              {% set hours = minutes // 60 %}
+              {% set mins = minutes % 60 %}
+              {{ "%d:%02d" | format(hours, mins) }}
+            start_time: "{{ states('input_datetime.motive_timer_start') }}"
+    
+        # Zeit bis zum Ziel
+        - name: "Motive Time to Goal"
+          unique_id: motive_time_to_goal
+          state: >
+            {% set remaining = states('input_number.motive_daily_goal') | int - states('input_number.motive_time_tracked_today') | int %}
+            {% if remaining <= 0 %}
+              Erreicht!
+            {% else %}
+              {% set hours = remaining // 60 %}
+              {% set mins = remaining % 60 %}
+              {{ "%d:%02d Stunden" | format(hours, mins) }}
+            {% endif %}
+          icon: mdi:target
+          attributes:
+            minutes_remaining: >
+              {% set diff = states('input_number.motive_daily_goal') | int - states('input_number.motive_time_tracked_today') | int %}
+              {{ diff if diff > 0 else 0 }}

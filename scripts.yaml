@@ -72,26 +72,3 @@ motive_add_time:
       data:
         title: "➕ Zeit hinzugefügt"
         message: "{{ minutes }} Minuten wurden manuell hinzugefügt"
-
-# Motive - Test Timer (Optional - für Tests)
-motive_test_timer:
-  alias: "Motive - Test Timer"
-  mode: single
-  sequence:
-    - service: input_datetime.set_datetime
-      target:
-        entity_id: input_datetime.motive_timer_start
-      data:
-        datetime: "{{ now() - timedelta(minutes=5) }}"
-    - delay:
-        seconds: 1
-    - variables:
-        start: "{{ states('input_datetime.motive_timer_start') }}"
-        elapsed: "{{ ((as_timestamp(now()) - as_timestamp(start)) / 60) | int }}"
-    - service: persistent_notification.create
-      data:
-        title: "⚡ Test Info"
-        message: |
-          Start: {{ start }}
-          Vergangen: {{ elapsed }} Minuten
-          Aktuell getrackt: {{ states('input_number.motive_time_tracked_today') }} min
