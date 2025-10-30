@@ -284,7 +284,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 ## 🙏 Acknowledgments
 
 - Home Assistant Community
-- [**@valentin-berlin**](https://github.com/valentin-berlin/) for the idea
+- [**@v-berlin**](https://github.com/v-berlin/) for the idea
 
 ---
 
