@@ -20,6 +20,11 @@ A beautifully designed productivity tracking system for Home Assistant that turn
 > [!Info]
 > This Project is built for Home Assistant Docker but it will also work with HA 
 > Core. The steps you need to do are a little different but not that far off.
+
+> [!Info]
+> The original Version named "Flow" can be found [here](). Flow is not under 
+> development anymore and the new project is called Motive. Motive will start with 
+> the same features as Flow but will get more eventually.
 </div>
 
 ---
