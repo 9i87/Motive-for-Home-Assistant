@@ -15,6 +15,9 @@ A beautifully designed productivity tracking system for Home Assistant that turn
 > [!WARNING]
 > ⚠️ The README.md and the comments in the code are generatet by AI. Errors may be present. If you find one feel free to create an Issue with the Tag "Readme". Thanks for your cooperation
 
+> [!WARNING]  
+> Critical content demanding immediate user attention due to potential risks.
+
 > [!Info]
 > This Project is built for Home Assistant Docker but it will also work with HA 
 > Core. The steps you need to do are a little different but not that far off.
