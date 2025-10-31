@@ -20,7 +20,7 @@ Made by @v-berlin and @apfelFunker
 This Project is built for Home Assistant Docker but it will also work with HA Core. The steps you need to do are a little different but not that far off.
 
 #### Info
-The original Version named "Flow" can be found [here](). Flow is not under development anymore and the new project is called Motive. Motive will start with the same features as Flow but will get more eventually.
+The original Version named "Motive" can be found [here](). Motive is not under development anymore and the new project is called Motive. Motive will start with the same features as Motive but will get more eventually.
 </div>
 
 ---
@@ -606,8 +606,8 @@ You need to access your Home Assistant configuration directory. Choose one of th
 Copy the three YAML files from this repository to your Home Assistant configuration directory:
 
 1. **motive.yaml** - Main configuration with all entities and sensors
-2. **flow_automations.yaml** - Automations for Motive (append to existing file)
-3. **flow_scripts.yaml** - Helper scripts for Motive (append to existing file)
+2. **motive_automations.yaml** - Automations for Motive (append to existing file)
+3. **motive_scripts.yaml** - Helper scripts for Motive (append to existing file)
 
 #### Important Notes:
 
