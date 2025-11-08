@@ -21,6 +21,16 @@ This Project is built for Home Assistant Docker but it will also work with HA Co
 
 #### Info
 The original Version named "Motive" can be found [here](). Motive is not under development anymore and the new project is called Motive. Motive will start with the same features as Motive but will get more eventually.
+
+### Important for Installation
+If you already have automation files, script files or package files, move them to a folder and put the motive files into the same folder.
+After that add the following to your configuration.yaml:
+```yaml
+homeassistant:
+  packages: !include_dir_merge_named packages
+automation: !include_dir_merge_list automations
+script: !include_dir_merge_named scripts
+```
 </div>
 
 ---

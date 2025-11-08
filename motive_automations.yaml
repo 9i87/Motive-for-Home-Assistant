@@ -214,34 +214,6 @@
     data:
       datetime: '{{ now() }}'
   mode: single
-- id: bd4a3f2ab8e94c4e883caf4837aea542
-  alias: Motive - Goal Reached Notification
-  description: Benachrichtigung wenn 100% erreicht
-  trigger:
-  - platform: numeric_state
-    entity_id: sensor.motive_goal_progress
-    above: 99.9
-  condition:
-  - condition: state
-    entity_id: input_boolean.motive_sick_mode
-    state: 'off'
-  - condition: template
-    value_template: '{{ (now() - this.attributes.last_triggered | default(as_datetime(0)))
-      > timedelta(hours=20) }}
-
-      '
-  action:
-  - service: persistent_notification.create
-    data:
-      title: "\U0001F389 Tagesziel erreicht!"
-      message: 'Glückwunsch! Du hast dein Ziel erreicht!
-
-        Getrackt: {{ states(''input_number.motive_time_tracked_today'') }} Minuten
-
-        Streak: {{ states(''input_number.motive_streak_counter'') }} Tage
-
-        '
-  mode: single
 
 - id: ffd3f3e2b1b14c1fa5e2e4e2b6f4c8d3
   alias: Motive Timer Tick

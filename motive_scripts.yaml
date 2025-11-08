@@ -62,13 +62,14 @@ motive_add_time:
         number:
           min: 1
           max: 480
+          mode: box
   sequence:
     - service: input_number.set_value
       target:
         entity_id: input_number.motive_time_tracked_today
       data:
-        value: "{{ [states('input_number.motive_time_tracked_today') | int + minutes, 1440] | min }}"
+        value: "{{ [states('input_number.motive_time_tracked_today') | int + (minutes | default(0) | int), 1440] | min }}"
     - service: persistent_notification.create
       data:
         title: "➕ Zeit hinzugefügt"
-        message: "{{ minutes }} Minuten wurden manuell hinzugefügt"
+        message: "{{ minutes | default(0) | int }} Minuten wurden manuell hinzugefügt"
